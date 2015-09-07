@@ -1,0 +1,41 @@
+{
+  "name": "cusx-seed",
+  "version": "0.0.1",
+  "description": "Seed Project for cusx's Project",
+  "author": "cusx",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^6.0.1",
+    "browser-sync": "^2.9.1",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.2.1",
+    "gulp-eslint": "^1.0.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-postcss": "^6.0.0",
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.5.2",
+    "jspm": "^0.16.2",
+    "lost": "^6.5.0",
+    "run-sequence": "^1.1.2",
+    "yargs": "^3.24.0"
+  },
+  "jspm": {
+    "directories": {
+      "baseURL": "dist",
+      "lib": "src",
+      "packages": "jspm_packages"
+    },
+    "configFile": "system.config.js",
+    "dependencies": {
+      "angular": "github:angular/bower-angular@^1.4.5"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.22",
+      "babel-runtime": "npm:babel-runtime@^5.8.20",
+      "core-js": "npm:core-js@^1.1.0"
+    }
+  },
+  "dependencies": {
+    "connect-history-api-fallback": "^1.1.0"
+  }
+}

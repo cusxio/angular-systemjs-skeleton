@@ -1,0 +1,8 @@
+/**
+ * Seed Project for cusx's Project
+ * @version v0.0.1 - 7/09/2015
+ * @author cusx
+ * @copyright 2015(c) cusx
+ * @license MIT
+ */
+{"version":3,"sources":["app/controllers/user/hello.js"],"names":["gulp","task","cb","runSequence","alert"],"mappings":"AAAA,YAEAA,MAAKC,KAAK,QAAS,SAAUC,GACzBC,aAAa,UAAW,UAAW,SAAU,SAAU,SAAUD,KAErEE,MAAM","file":"app/controllers/user/hello-89dacbe721.js","sourcesContent":["'use strict';\n\ngulp.task('build', function (cb) {\n    runSequence(['clean'], ['compile', 'extras', 'images', 'fonts'], cb);\n});\nalert('Working!');\n//# sourceMappingURL=../../../app/controllers/user/hello.js.map"],"sourceRoot":"/source/"}

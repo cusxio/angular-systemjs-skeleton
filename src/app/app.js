@@ -1,1 +1,1 @@
-console.log('So This works after All')
+() => console.log('This is working')

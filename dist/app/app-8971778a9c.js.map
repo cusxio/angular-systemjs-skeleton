@@ -1,0 +1,8 @@
+/**
+ * Seed Project for cusx's Project
+ * @version v0.0.1 - 7/09/2015
+ * @author cusx
+ * @copyright 2015(c) cusx
+ * @license MIT
+ */
+{"version":3,"sources":["app/app.js"],"names":[],"mappings":"AAAA","file":"app/app-8971778a9c.js","sourcesContent":["'use strict';\n\n(function () {\n  return console.log('This is working');\n});\n//# sourceMappingURL=../app/app.js.map"],"sourceRoot":"/source/"}

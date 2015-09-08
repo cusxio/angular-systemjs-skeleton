@@ -25,7 +25,8 @@ var config = require('./gulp.config.js'),
     moment = require('moment'),
     deleteLines = require('gulp-delete-lines'),
     inject = require('gulp-inject'),
-    uglify = require('gulp-uglify');
+    uglify = require('gulp-uglify'),
+    del = require('rimraf');
 
 
 /**
@@ -202,6 +203,28 @@ gulp.task('watch', function() {
 
 /**
  *
+ * CLEAN
+ *
+ */
+gulp.task('clean-dist', function(cb) {
+    var files = config.dist.basePath;
+    log(gutil.colors.blue('Cleaning: ' + files));
+    del(files, cb);
+});
+
+gulp.task('clean-tmp', function(cb) {
+    var files = config.tmp.basePath;
+    log(gutil.colors.blue('Cleaning: ' + files));
+    del(files, cb);
+});
+
+gulp.task('clean', function(cb) {
+    runSequence(
+        ['clean-dist', 'clean-tmp'], cb
+        );
+});
+/**
+ *
  *  BUILD
  *
  */
@@ -232,7 +255,7 @@ gulp.task('serve', function(cb) {
             break;
     }
     runSequence(
-        tasks , ['server'], cb
+        tasks, ['server'], cb
     );
 });
 

@@ -7,6 +7,7 @@ var config = {
         html: 'src/**/**/*.html',
     },
     tmp: {
+        basePath: '.tmp/',
         styles: '.tmp/styles',
         scripts: '.tmp/scripts'
     },

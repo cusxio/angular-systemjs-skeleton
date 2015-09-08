@@ -103,7 +103,7 @@ gulp.task('babel', function() {
             errorHandler: onError
         }))
         .pipe(sourcemaps.init())
-        .pipe(babel())
+        .pipe(babel({modules: 'system'}))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(config.tmp.scripts));
 });
@@ -117,11 +117,11 @@ gulp.task('scripts', function() {
         .pipe(bytediff.start())
         .pipe(uglify())
         .pipe(bytediff.stop(bytediffFormatter))
-        .pipe(rev())
+        //.pipe(rev())
         .pipe(sourcemaps.write('.'))
         .pipe(header(banner))
         .pipe(gulp.dest(config.dist.basePath));
-})
+});
 
 /**
  *
@@ -221,16 +221,16 @@ gulp.task('clean-tmp', function(cb) {
 gulp.task('clean', function(cb) {
     runSequence(
         ['clean-dist', 'clean-tmp'], cb
-        );
+    );
 });
 /**
  *
  *  BUILD
  *
  */
-gulp.task('build', function(cb) {
+gulp.task('build', ['clean'], function(cb) {
     runSequence(
-        ['fonts', 'images', 'css', 'scripts'], ['html'], cb
+        ['sass', 'babel'], ['fonts', 'images', 'css', 'scripts'], ['html'], ['clean-tmp'], cb
     );
 });
 
@@ -240,7 +240,7 @@ gulp.task('build', function(cb) {
  * TASKS
  *
  */
-gulp.task('serve', function(cb) {
+gulp.task('serve', ['clean'], function(cb) {
     var tasks;
     var environment = findEnvironment();
     switch (environment) {

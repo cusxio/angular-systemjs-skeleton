@@ -2,7 +2,9 @@
 <html lang="en">
 
 <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
     <title>cusx Seed Project</title>
     <!-- inject:css -->
     <link rel="stylesheet" href="styles/styles.css">
@@ -10,10 +12,11 @@
 </head>
 
 <body>
-    <h1>I am in Developing Mode</h1>
+    <div ng-include="'app/views/nav.html'" ng-controller="navCtrl as nav"></div>
+    <div ui-view></div>
     <script src="jspm_packages/system.js"></script>
     <script src="system.config.js"></script>
-    <script>System.import('app/app')</script>
+    <script>System.import('app/app');</script>
 </body>
 
 </html>

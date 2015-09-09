@@ -1,15 +1,15 @@
 var config = {
     src: {
+        basePath: 'src/',
         images: 'src/assets/images/*',
         fonts: 'src/assets/fonts/**/*.*',
         sass: 'src/sass/**/*.sass',
-        scripts: 'src/**/**/*.js',
-        html: 'src/**/**/*.html',
+        scripts: 'src/**/**/**/*.js',
+        html: 'src/**/**/**/*.html',
     },
     tmp: {
         basePath: '.tmp/',
-        styles: '.tmp/styles',
-        scripts: '.tmp/scripts'
+        styles: '.tmp/styles'
     },
     dist: {
         basePath: 'dist/',

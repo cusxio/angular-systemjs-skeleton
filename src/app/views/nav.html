@@ -1,0 +1,21 @@
+<header>
+    <div class="header__wrapper">
+        <div class="header__logo">
+            <a href="http://cusx.io">cusx.io seed</a>
+        </div>
+        <div class="hamburger" ng-click="nav.button()" ng-class="{'active': nav.isActive}">
+            <div class="line line-1"></div>
+            <div class="line line-2"></div>
+            <div class="line line-3"></div>
+        </div>
+        <div class="header__menu" ng-class="{'active': nav.isActive}">
+            <div class="wrapper">
+                <ul class="menu-list">
+                    <a href="/">Home</a>
+                    <a href="/about">About</a>
+                    <a href="/contact">Contact</a>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>

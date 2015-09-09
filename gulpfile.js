@@ -53,7 +53,7 @@ gulp.task('server', function() {
     switch (environment) {
         case 'DEV':
         case 'dev':
-            startBrowserSync = browserSyncConfig(['src/', '.tmp'], 3000);
+            startBrowserSync = browserSyncConfig('.tmp', 3000);
             break;
         case 'PROD':
         case 'prod':
@@ -103,9 +103,11 @@ gulp.task('babel', function() {
             errorHandler: onError
         }))
         .pipe(sourcemaps.init())
-        .pipe(babel({modules: 'system'}))
+        .pipe(babel({
+            modules: 'system'
+        }))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(config.tmp.scripts));
+        .pipe(gulp.dest(config.tmp.basePath));
 });
 
 gulp.task('scripts', function() {
@@ -188,6 +190,11 @@ gulp.task('html', function() {
         .pipe(gulp.dest(config.dist.basePath));
 });
 
+gulp.task('html-tmp', function() {
+    return gulp.src(config.src.html)
+        .pipe(gulp.dest(config.tmp.basePath));
+});
+
 
 /**
  *
@@ -198,6 +205,7 @@ gulp.task('watch', function() {
     gulp.watch(config.src.sass, ['sass']);
     gulp.watch(config.src.scripts, ['babel']);
     gulp.watch(config.src.scripts).on('change', browserSync.reload);
+    gulp.watch(config.src.html, ['html-tmp']);
     gulp.watch(config.src.html).on('change', browserSync.reload);
 });
 
@@ -233,7 +241,11 @@ gulp.task('build', ['clean'], function(cb) {
         ['sass', 'babel'], ['fonts', 'images', 'css', 'scripts'], ['html'], ['clean-tmp'], cb
     );
 });
-
+gulp.task('build-tmp', ['clean'], function(cb) {
+    runSequence(
+        'sass', 'babel', 'html-tmp'
+        );
+});
 
 /**
  *
@@ -246,7 +258,7 @@ gulp.task('serve', ['clean'], function(cb) {
     switch (environment) {
         case 'DEV':
         case 'dev':
-            tasks = ['sass', 'babel', 'watch'];
+            tasks = ['html-tmp', 'sass', 'babel', 'watch'];
             break;
         case 'PROD':
         case 'prod':

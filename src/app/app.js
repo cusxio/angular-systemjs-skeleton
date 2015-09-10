@@ -21,6 +21,3 @@ angular.element(document).ready(function() {
   
 
 export default app;
-
-
-

@@ -11,9 +11,9 @@
         <div class="header__menu" ng-class="{'active': nav.isActive}">
             <div class="wrapper">
                 <ul class="menu-list">
-                    <a href="/">Home</a>
-                    <a href="/about">About</a>
-                    <a href="/contact">Contact</a>
+                    <a ng-click="nav.button()" href="#/">Home</a>
+                    <a ng-click="nav.button()" href="#/about">About</a>
+                    <a ng-click="nav.button()" href="#/contact">Contact</a>
                 </ul>
             </div>
         </div>

@@ -1,8 +1,9 @@
 import 'angular-ui-router';
-var routeModule = angular.module('route', ['ui.router']);
+
+var app = angular.module('seedApp.route', ['ui.router']);
 
 
-routeModule.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     
     $urlRouterProvider.otherwise('/');
 
@@ -11,6 +12,11 @@ routeModule.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             url: '/',
             templateUrl: 'app/views/home.html'
         })
+        .state('about', {
+            url: '/about',
+            templateUrl: 'app/views/about.html',
+            controller: 'aboutCtrl as about'
+        });
 }]);
 
-export default routeModule;
+export default app;

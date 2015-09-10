@@ -3,21 +3,18 @@ import angular from 'angular';
 import '../styles/normalize.css!';
 
 //Controllers
-import {navCtrl} from './controllers/nav.js';
+import controllers from './controllers/_index.js'
 
-// author
-import routeModule from './routes/routes.config.js';
+// Routes
+import routes from './routes/routes.config.js';
 
-var app = angular.module('app', [routeModule.name]);
+var seedApp = angular.module('seedApp', ['seedApp.route', 'seedApp.controllers']);
 
-app.controller('navCtrl', navCtrl);
 
 angular.element(document).ready(function() {
-    return angular.bootstrap(document.body, [app.name], {
+    return angular.bootstrap(document.body, [seedApp.name], {
         strictDi: true
     });
 });
 
-  
-
-export default app;
+export default seedApp;

@@ -55,6 +55,12 @@
     }
   },
   "dependencies": {
-    "connect-history-api-fallback": "^1.1.0"
+    "body-parser": "^1.13.3",
+    "chalk": "^1.1.1",
+    "compression": "^1.5.2",
+    "connect-history-api-fallback": "^1.1.0",
+    "express": "^4.13.3",
+    "morgan": "^1.6.1",
+    "path": "^0.11.14"
   }
 }

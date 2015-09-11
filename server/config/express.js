@@ -1,7 +1,8 @@
 var express = require('express'),
     morgan = require('morgan'),
     compression = require('compression'),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    path = require('path');
 
 
 module.exports = function() {
@@ -12,5 +13,7 @@ module.exports = function() {
     app.use(bodyParser.json());
     app.use(morgan('dev'));
 
+
+    app.use(express.static(path.join(__dirname + "/../../dist")));
     return app;
 };

@@ -14,9 +14,11 @@
 <body>
     <div ng-include="'app/views/nav.html'" ng-controller="navCtrl as nav"></div>
     <div ui-view></div>
+    <!-- inject:js -->
     <script src="jspm_packages/system.js"></script>
     <script src="system.config.js"></script>
     <script>System.import('app/app');</script>
+    <!-- endinject -->
 </body>
 
 </html>

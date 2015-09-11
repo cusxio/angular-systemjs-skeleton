@@ -6,16 +6,19 @@ var config = {
         sass: 'src/sass/**/*.sass',
         scripts: 'src/**/**/**/*.js',
         html: 'src/**/**/**/*.html',
+        srchtml: 'src/*.html'
     },
     tmp: {
         basePath: '.tmp/',
-        styles: '.tmp/styles'
+        styles: '.tmp/styles',
+        scripts: '.tmp/app/app'
     },
     dist: {
         basePath: 'dist/',
         images: 'dist/assets/images',
         fonts: 'dist/assets/fonts',
-        styles: 'dist/styles'
+        styles: 'dist/styles',
+        scripts: 'dist/scripts'
     }
 };
 

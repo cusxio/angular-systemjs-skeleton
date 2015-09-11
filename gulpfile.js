@@ -20,13 +20,13 @@ var config = require('./gulp.config.js'),
     bytediff = require('gulp-bytediff'),
     minifyCss = require('gulp-minify-css'),
     minifyHTML = require('gulp-minify-html'),
-    rev = require('gulp-rev'),
     header = require('gulp-header'),
     moment = require('moment'),
     deleteLines = require('gulp-delete-lines'),
     inject = require('gulp-inject'),
     uglify = require('gulp-uglify'),
     del = require('rimraf');
+
 
 
 /**
@@ -110,8 +110,9 @@ gulp.task('babel', function() {
         .pipe(gulp.dest(config.tmp.basePath));
 });
 
+// This will only be used once I understand how to dynamically load controllers/views based on routes, in the meantime, bundling everything to a single app.js file.
 gulp.task('scripts', function() {
-    gulp.src(config.tmp.scripts + '/**/**/*.js')
+    gulp.src(config.tmp.basePath + '/**/**/*.js')
         .pipe(sourcemaps.init())
         .pipe(plumber({
             errorHandler: onError
@@ -123,6 +124,50 @@ gulp.task('scripts', function() {
         .pipe(sourcemaps.write('.'))
         .pipe(header(banner))
         .pipe(gulp.dest(config.dist.basePath));
+});
+
+gulp.task('buildjs', function(cb) {
+    var Builder = require('systemjs-builder');
+    var builder = new Builder();
+    var inputPath = config.tmp.scripts;
+    var outputFile = config.dist.scripts + '/app.js';
+    builder.loadConfig('./system.config.js')
+        .then(function() {
+            builder.buildSFX(inputPath, outputFile)
+                .then(function() {
+                    return cb();
+                })
+                .catch(function(err) {
+                    cb(new Error(err));
+                });
+        });
+});
+
+gulp.task('post-buildjs', function() {
+    gulp.src(config.dist.scripts + '/app.js')
+        .pipe(sourcemaps.init())
+        .pipe(plumber({
+            errorHandler: onError
+        }))
+        .pipe(bytediff.start())
+        .pipe(uglify())
+        .pipe(bytediff.stop(bytediffFormatter))
+        //.pipe(rev())
+        .pipe(sourcemaps.write('.'))
+        .pipe(header(banner))
+        .pipe(gulp.dest(config.dist.scripts));
+});
+
+//gulp.task('del-nonmin-buildjs', function(cb) {
+//    var file = config.dist.scripts + '/app.js';
+//    log(gutil.colors.blue('Cleaning: ' + file));
+//    del(file, cb);
+//});
+
+gulp.task('bundle', function(cb) {
+    runSequence(
+        'buildjs', 'post-buildjs', cb
+    );
 });
 
 /**
@@ -157,7 +202,6 @@ gulp.task('css', function() {
         .pipe(bytediff.start())
         .pipe(minifyCss())
         .pipe(bytediff.stop(bytediffFormatter))
-        .pipe(rev())
         .pipe(header(banner))
         .pipe(gulp.dest(config.dist.styles));
 });
@@ -174,12 +218,12 @@ gulp.task('html', function() {
                 /<link\b.+href="(?!http)([^"]*)(".*>)/gm
             ]
         }))
-        //        .pipe(deleteLines({
-        //            'filters': [
-        //                /<script\b[^>]*>([\s\S]*?)<\/script>/gm
-        //            ]
-        //        }))
-        .pipe(inject(gulp.src(config.dist.styles + '/**/*.css', {
+        .pipe(deleteLines({
+            'filters': [
+                /<script\b[^>]*>([\s\S]*?)<\/script>/gm
+            ]
+        }))
+        .pipe(inject(gulp.src([config.dist.styles + '/*.css', config.dist.scripts + '/*.js'], {
             read: false
         }), {
             ignorePath: 'dist'
@@ -238,13 +282,13 @@ gulp.task('clean', function(cb) {
  */
 gulp.task('build', ['clean'], function(cb) {
     runSequence(
-        ['sass', 'babel'], ['fonts', 'images', 'css', 'scripts'], ['html'], ['clean-tmp'], cb
+        ['sass', 'babel'], ['fonts', 'images', 'css'], 'bundle', 'html', 'clean-tmp', cb
     );
 });
 gulp.task('build-tmp', ['clean'], function(cb) {
     runSequence(
-        'sass', 'babel', 'html-tmp'
-        );
+        'sass', 'babel', 'html-tmp', cb
+    );
 });
 
 /**

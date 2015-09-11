@@ -16,6 +16,11 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             url: '/about',
             templateUrl: 'app/views/about.html',
             controller: 'aboutCtrl as about'
+        })
+        .state('contact', {
+            url: '/contact',
+            templateUrl: 'app/views/contact.html',
+            controller: 'contactCtrl as contact'
         });
 }]);
 

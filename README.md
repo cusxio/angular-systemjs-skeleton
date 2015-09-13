@@ -1,12 +1,11 @@
-# AngularJs + Ghost + SystemJS
+# AngularJS + SystemJS
 
-A Skeleton Project for AngularJS using SystemJS using Ghost as an [NPM Module](https://github.com/TryGhost/Ghost/wiki/Using-Ghost-as-an-npm-module).
+A Skeleton Project for AngularJS using SystemJS
 
 ## Featrues
 - ES6 via Babel
 - AngularJS with ES6 modules via SystemJS
 - SASS
-- Ghost as an NPM module mounted on a subdirectory.
 
 ## Setup
 ```bash
@@ -25,15 +24,6 @@ gulp serve --production
 gulp serve --development
 ```
 
-## Using Ghost
-NOTE: Ghost is only served through the production build and is not available on development build.
-You will also need to change ghost's ``config.js`` development url to ``url: 'http://localhost:9000/blog'``
-```bash
-gulp serve --production
-
-cd server
-
-node server.js
-```
-
+### Todo
+Using Ghost as an NPM module and mount to subdirectory.
 

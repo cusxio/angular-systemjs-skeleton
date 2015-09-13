@@ -1,7 +1,7 @@
 <header>
     <div class="header__wrapper">
         <div class="header__logo">
-            <a href="http://cusx.io">Angular Seed</a>
+            <a href="/">Angular Seed</a>
         </div>
         <div class="hamburger" ng-click="nav.button()" ng-class="{'active': nav.isActive}">
             <div class="line line-1"></div>
@@ -11,9 +11,10 @@
         <div class="header__menu" ng-class="{'active': nav.isActive}">
             <div class="wrapper">
                 <ul class="menu-list">
-                    <a ng-click="nav.button()" href="#/">Home</a>
-                    <a ng-click="nav.button()" href="#/about">About</a>
-                    <a ng-click="nav.button()" href="#/contact">Contact</a>
+                    <a ng-click="nav.button()" href="/">Home</a>
+                    <a ng-click="nav.button()" href="/about">About</a>
+                    <a ng-click="nav.toBlog()" href="/blog">Blog</a>
+                    <a ng-click="nav.button()" href="/contact">Contact</a>
                 </ul>
             </div>
         </div>
